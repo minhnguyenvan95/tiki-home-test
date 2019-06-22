@@ -71,3 +71,4 @@ fabric.properties
 gradle
 application.log
 out.csv
+build

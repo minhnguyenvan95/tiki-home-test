@@ -2,6 +2,9 @@ plugins {
     id 'java'
 }
 
+apply plugin:'application'
+mainClassName = "Main"
+
 group 'tiki.vn'
 version '1.0-SNAPSHOT'
 
