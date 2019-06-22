@@ -47,6 +47,7 @@ public class Main {
     private static void writeListRealActivationDate(List<ImmutablePair<RealActivationDateDetail, Throwable>> immutablePairs) throws FileNotFoundException, UnsupportedEncodingException {
         // write to file
         PrintWriter writer = new PrintWriter("out.csv", "UTF-8");
+        writer.println("PHONE_NUMBER,REAL_ACTIVATION_DATE");
 
         immutablePairs.forEach(pair -> {
             RealActivationDateDetail left = pair.getLeft();
