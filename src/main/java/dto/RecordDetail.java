@@ -3,7 +3,7 @@ package dto;
 public class RecordDetail {
     private String phoneNumber;
     private String activationDate;
-    private String deActivationDate;
+    private String deactivationDate;
 
     public RecordDetail() {
     }
@@ -24,11 +24,11 @@ public class RecordDetail {
         this.activationDate = activationDate;
     }
 
-    public String getDeActivationDate() {
-        return deActivationDate;
+    public String getDeactivationDate() {
+        return deactivationDate;
     }
 
-    public void setDeActivationDate(String deActivationDate) {
-        this.deActivationDate = deActivationDate;
+    public void setDeactivationDate(String deActivationDate) {
+        this.deactivationDate = deActivationDate;
     }
 }

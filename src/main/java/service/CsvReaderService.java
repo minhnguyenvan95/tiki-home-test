@@ -3,7 +3,9 @@ package service;
 import dto.RecordDetail;
 import exception.CsvServiceException;
 import exception.IllegalCsvRecordFormatException;
+import exception.InvalidRecordDataException;
 import org.apache.log4j.Logger;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 import repository.RecordRepository;
 
 import java.io.BufferedReader;
@@ -37,7 +39,7 @@ public class CsvReaderService {
      * @param numberOfHeaderRowToBeSkip
      * @throws IOException
      */
-    public void readCsvFile(String filePath, int numberOfHeaderRowToBeSkip) throws IOException, CsvServiceException {
+    public void readCsvFile(String filePath, int numberOfHeaderRowToBeSkip) throws IOException, CsvServiceException, InvalidRecordDataException {
         File file = new File(filePath);
         FileReader fileReader = new FileReader(file);
 
@@ -87,7 +89,7 @@ public class CsvReaderService {
             recordDetail.setActivationDate(parts[1]);
 
             if (parts.length == 3) {
-                recordDetail.setDeActivationDate(parts[2]);
+                recordDetail.setDeactivationDate(parts[2]);
             }
             return recordDetail;
         } else {

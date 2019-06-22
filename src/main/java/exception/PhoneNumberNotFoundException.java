@@ -1,4 +1,4 @@
 package exception;
 
-public class PhoneNumberNotFoundException extends RecordServiceException {
+public class PhoneNumberNotFoundException extends RecordRepositoryException {
 }

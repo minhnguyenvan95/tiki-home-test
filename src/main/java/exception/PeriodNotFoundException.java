@@ -1,4 +1,4 @@
 package exception;
 
-public class PeriodNotFoundException extends RecordServiceException {
+public class PeriodNotFoundException extends RecordRepositoryException {
 }

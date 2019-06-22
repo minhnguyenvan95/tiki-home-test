@@ -1,4 +1,7 @@
 import dto.RealActivationDateDetail;
+import exception.CsvServiceException;
+import exception.HomeTestException;
+import exception.InvalidRecordDataException;
 import exception.RecordServiceException;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
@@ -9,7 +12,6 @@ import service.CsvReaderService;
 import service.RecordService;
 import util.DateUtil;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +27,7 @@ public class UserRecordServiceTests {
     private RecordService recordService;
     private CsvReaderService csvReaderService;
 
-    public UserRecordServiceTests() {
+    public UserRecordServiceTests() throws Exception {
         recordRepository = new RecordRepository();
         recordService = new RecordService(recordRepository);
         // csv reader service will read csv data and index into the repository
@@ -33,13 +35,8 @@ public class UserRecordServiceTests {
 
         try {
             csvReaderService.readCsvFile(CSV_FILE_PATH, 1);
-        } catch (FileNotFoundException e) {
-            logger.error(String.format("Can't file at path : %s", CSV_FILE_PATH));
-        } catch (IOException e) {
-            logger.error(String.format("Something went wrong when trying to read csv file: %s", CSV_FILE_PATH));
-            e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 

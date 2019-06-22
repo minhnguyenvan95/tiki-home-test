@@ -70,4 +70,4 @@ fabric.properties
 .idea
 gradle
 application.log
-out.txt
+out.csv

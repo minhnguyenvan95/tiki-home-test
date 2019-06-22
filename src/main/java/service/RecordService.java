@@ -1,6 +1,5 @@
 package service;
 
-import com.sun.tools.javac.util.Pair;
 import dto.RealActivationDateDetail;
 import exception.PeriodNotFoundException;
 import exception.RecordServiceException;
@@ -11,10 +10,8 @@ import repository.RecordRepository;
 import util.DateUtil;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class RecordService {
 
@@ -42,19 +39,21 @@ public class RecordService {
                     Record recordCurrent = records.get(i);
                     Record recordPrevious = records.get(i - 1);
 
-                    // compare currentActivationDate to previousActivationDate
-                    long dateDiff = DateUtil.getDateDiff(
-                            recordPrevious.getDeActivationDate(),
-                            recordCurrent.getActivationDate(),
-                            TimeUnit.DAYS
-                    );
+                    if (recordPrevious.getDeactivationDate() != null) {
+                        // compare currentActivationDate to previousActivationDate
+                        long dateDiff = DateUtil.getDateDiff(
+                                recordPrevious.getDeactivationDate(),
+                                recordCurrent.getActivationDate(),
+                                TimeUnit.DAYS
+                        );
 
-                    // check if phoneNumber have change their owner by the MINIMUM_DAY_PHONE_NUMBER_COULD_BE_USE_BY_ANOTHER condition
-                    if (dateDiff >= MINIMUM_DAY_PHONE_NUMBER_COULD_BE_USE_BY_ANOTHER) {
-                        RealActivationDateDetail realActivationDateDetail = new RealActivationDateDetail();
-                        realActivationDateDetail.setPhoneNumber(phoneNumber);
-                        realActivationDateDetail.setRealActivationDate(recordCurrent.getActivationDate());
-                        return realActivationDateDetail;
+                        // check if phoneNumber have change their owner by the MINIMUM_DAY_PHONE_NUMBER_COULD_BE_USE_BY_ANOTHER condition
+                        if (dateDiff >= MINIMUM_DAY_PHONE_NUMBER_COULD_BE_USE_BY_ANOTHER) {
+                            RealActivationDateDetail realActivationDateDetail = new RealActivationDateDetail();
+                            realActivationDateDetail.setPhoneNumber(phoneNumber);
+                            realActivationDateDetail.setRealActivationDate(recordCurrent.getActivationDate());
+                            return realActivationDateDetail;
+                        }
                     }
                 }
             }
@@ -71,6 +70,7 @@ public class RecordService {
 
     /**
      * listRealActivationDate with result or exception
+     *
      * @return
      */
     public List<ImmutablePair<RealActivationDateDetail, Throwable>> listRealActivationDate() {
