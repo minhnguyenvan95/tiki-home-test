@@ -5,7 +5,6 @@ import exception.CsvServiceException;
 import exception.IllegalCsvRecordFormatException;
 import exception.InvalidRecordDataException;
 import org.apache.log4j.Logger;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 import repository.RecordRepository;
 
 import java.io.BufferedReader;
@@ -25,15 +24,7 @@ public class CsvReaderService {
     }
 
     /**
-     * getRecordRepository
-     * @return
-     */
-    public RecordRepository getRecordRepository() {
-        return recordRepository;
-    }
-
-    /**
-     * readCsvFile to prepare recordRepository
+     * readCsvFile to record repository
      *
      * @param filePath
      * @param numberOfHeaderRowToBeSkip
@@ -72,7 +63,8 @@ public class CsvReaderService {
     }
 
     /**
-     * return RecordDetail
+     * return parse csv line to RecordDetail
+     *
      * @param line
      * @return
      * @throws IllegalCsvRecordFormatException
@@ -80,7 +72,7 @@ public class CsvReaderService {
     private RecordDetail parseRecordDetail(String line) throws IllegalCsvRecordFormatException {
         String[] parts = line.split(",");
 
-        // FIXME: each record must have at least 2 argument
+        // each record must have at least 2 argument
         if (parts.length >= 2) {
             //prepare dto
             RecordDetail recordDetail = new RecordDetail();

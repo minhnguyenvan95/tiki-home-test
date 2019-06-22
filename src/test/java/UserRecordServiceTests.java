@@ -1,7 +1,4 @@
 import dto.RealActivationDateDetail;
-import exception.CsvServiceException;
-import exception.HomeTestException;
-import exception.InvalidRecordDataException;
 import exception.RecordServiceException;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
@@ -12,7 +9,6 @@ import service.CsvReaderService;
 import service.RecordService;
 import util.DateUtil;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -33,11 +29,7 @@ public class UserRecordServiceTests {
         // csv reader service will read csv data and index into the repository
         csvReaderService = new CsvReaderService(recordRepository);
 
-        try {
-            csvReaderService.readCsvFile(CSV_FILE_PATH, 1);
-        } catch (Exception e) {
-            throw e;
-        }
+        csvReaderService.readCsvFile(CSV_FILE_PATH, 1);
     }
 
     @Test

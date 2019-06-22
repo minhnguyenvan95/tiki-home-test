@@ -8,7 +8,6 @@ import util.DateUtil;
 
 import java.text.ParseException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class RecordRepository {
     private Map<String, List<Record>> usageRecordMap;
@@ -19,6 +18,7 @@ public class RecordRepository {
 
     /**
      * validate deactivationDate for recordDetail
+     *
      * @param recordDetail
      * @return
      */
