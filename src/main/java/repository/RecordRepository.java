@@ -9,11 +9,14 @@ import util.DateUtil;
 import java.text.ParseException;
 import java.util.*;
 
+/**
+ * A repository class that hold usage
+ */
 public class RecordRepository {
-    private Map<String, List<Record>> usageRecordMap;
+    private Map<String, List<Record>> phoneNumberRecordMap;
 
     public RecordRepository() {
-        this.usageRecordMap = new HashMap<>();
+        this.phoneNumberRecordMap = new HashMap<>();
     }
 
     /**
@@ -24,8 +27,8 @@ public class RecordRepository {
      */
     public boolean validateRecordDetailDeactivationDate(RecordDetail recordDetail) {
         if (recordDetail.getDeactivationDate() == null) {
-            if (usageRecordMap.containsKey(recordDetail.getPhoneNumber())) {
-                List<Record> records = usageRecordMap.get(recordDetail.getPhoneNumber());
+            if (phoneNumberRecordMap.containsKey(recordDetail.getPhoneNumber())) {
+                List<Record> records = phoneNumberRecordMap.get(recordDetail.getPhoneNumber());
 
                 // validate there is no deactivationDate record in record array for a specific phone number
                 return records.stream().noneMatch(
@@ -60,8 +63,8 @@ public class RecordRepository {
         }
 
         // check if phoneNumber key is exists
-        if (usageRecordMap.containsKey(phoneNumber)) {
-            List<Record> recordList = usageRecordMap.get(phoneNumber);
+        if (phoneNumberRecordMap.containsKey(phoneNumber)) {
+            List<Record> recordList = phoneNumberRecordMap.get(phoneNumber);
             recordList.add(record);
 
             // sort after insert by activationDate
@@ -70,7 +73,7 @@ public class RecordRepository {
             // new arrayList
             ArrayList<Record> recordArrayList = new ArrayList<>();
             recordArrayList.add(record);
-            usageRecordMap.put(phoneNumber, recordArrayList);
+            phoneNumberRecordMap.put(phoneNumber, recordArrayList);
         }
     }
 
@@ -82,8 +85,8 @@ public class RecordRepository {
      * @throws PhoneNumberNotFoundException
      */
     public List<Record> getRecordList(String phoneNumber) throws PhoneNumberNotFoundException {
-        if (usageRecordMap.containsKey(phoneNumber)) {
-            return usageRecordMap.get(phoneNumber);
+        if (phoneNumberRecordMap.containsKey(phoneNumber)) {
+            return phoneNumberRecordMap.get(phoneNumber);
         } else {
             throw new PhoneNumberNotFoundException();
         }
@@ -95,6 +98,6 @@ public class RecordRepository {
      * @return
      */
     public Set<String> getRecordKeys() {
-        return usageRecordMap.keySet();
+        return phoneNumberRecordMap.keySet();
     }
 }
