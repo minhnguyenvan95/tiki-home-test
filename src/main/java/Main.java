@@ -7,10 +7,7 @@ import service.CsvReaderService;
 import service.RecordService;
 import util.DateUtil;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.List;
 
 public class Main {
@@ -46,7 +43,9 @@ public class Main {
 
     private static void writeListRealActivationDate(List<ImmutablePair<RealActivationDateDetail, Throwable>> immutablePairs) throws FileNotFoundException, UnsupportedEncodingException {
         // write to file
-        PrintWriter writer = new PrintWriter("out.csv", "UTF-8");
+        File file = new File("out.csv");
+
+        PrintWriter writer = new PrintWriter(file, "UTF-8");
         writer.println("PHONE_NUMBER,REAL_ACTIVATION_DATE");
 
         immutablePairs.forEach(pair -> {
@@ -66,5 +65,9 @@ public class Main {
         });
 
         writer.close();
+
+        logger.debug(
+                String.format("=== WRITE CSV FILE: %s", file)
+        );
     }
 }

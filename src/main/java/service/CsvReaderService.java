@@ -31,6 +31,10 @@ public class CsvReaderService {
      * @throws IOException
      */
     public void readCsvFile(String filePath, int numberOfHeaderRowToBeSkip) throws IOException, CsvServiceException, InvalidRecordDataException {
+        logger.debug(
+                String.format("=== READ CSV FILE : %s", filePath)
+        );
+
         File file = new File(filePath);
         FileReader fileReader = new FileReader(file);
 
