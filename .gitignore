@@ -68,7 +68,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 .gradle
 .idea
-gradle
 application.log
 out.csv
 build
