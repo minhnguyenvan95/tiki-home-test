@@ -61,4 +61,13 @@ public class RecordRepository {
             throw new PhoneNumberNotFoundException();
         }
     }
+
+    /**
+     * getRecordKeys
+     *
+     * @return
+     */
+    public Set<String> getRecordKeys() {
+        return usageRecordMap.keySet();
+    }
 }
